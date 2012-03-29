@@ -1,6 +1,6 @@
 
 require 'sinatra'
-require 'sinatra/reloader' if development?
+require './environment'
 
 get '/' do
   "foodpr0n"
@@ -11,7 +11,7 @@ post '/pron' do
   "nyi"
 end
 
-put '/img-src' do
+post '/img-src' do
   "nyi"
 end
 
