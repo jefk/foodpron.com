@@ -1,10 +1,10 @@
 
 source :rubygems
 
-# prod
 gem 'sinatra', '~> 1.3.2'
 gem 'sequel', '~> 3.33.0'
 gem 'sqlite3', '~> 1.3.5'
+gem 'yajl-ruby', '~> 1.1.0'
 
 gem 'rake', '~> 0.9.2.2'
 

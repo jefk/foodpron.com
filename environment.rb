@@ -1,6 +1,7 @@
 
 require 'sequel'
 require 'yaml'
+require 'yajl'
 
 require 'sinatra/reloader' if development?
 
