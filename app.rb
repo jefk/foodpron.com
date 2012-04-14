@@ -7,7 +7,7 @@ get '/' do
 end
 
 post '/pron' do
-  # rotate the current image
+  # set a new image
   "nyi"
 end
 
