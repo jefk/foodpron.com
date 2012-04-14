@@ -15,7 +15,9 @@ post '/pron' do
   end
 
   status 201
-  Pron.create :image_id => img.id
+  pron = Pron.create
+  img.pron_id = pron.id
+  img.save
   ""
 end
 

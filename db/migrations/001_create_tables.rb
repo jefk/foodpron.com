@@ -18,7 +18,6 @@ Sequel.migration do
 
     create_table(:prons) do
       primary_key :id
-      Integer :image_id
       Datetime :created_at
       Datetime :updated_at
     end

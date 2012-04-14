@@ -4,7 +4,7 @@ class Image < Sequel::Model
   plugin :timestamps
   plugin :validation_helpers
 
-  one_to_one :pron
+  many_to_one :pron
 
   def validate
     super
