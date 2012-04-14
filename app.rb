@@ -18,3 +18,7 @@ end
 post '/img-src/decay' do
   "nyi"
 end
+
+get '/scores' do
+  ImageSource.order(:score.desc).limit(20).map(:img_src).join("<br>")
+end
