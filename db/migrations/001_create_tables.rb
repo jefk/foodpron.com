@@ -6,13 +6,21 @@ Sequel.migration do
 
     create_table(:image_sources) do
       primary_key :id
+      Integer :pron_id
       String :src
       String :attribution_url
-      Numeric :score, :default => 0
+      BigDecimal :score, :size => [12,3], :default => 0
       Datetime :created_at
       Datetime :updated_at
 
       index :src, :unique => true
+    end
+
+    create_table(:prons) do
+      primary_key :id
+      Integer :image_source_id
+      Datetime :created_at
+      Datetime :updated_at
     end
 
   end

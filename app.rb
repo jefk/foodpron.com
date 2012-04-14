@@ -3,12 +3,18 @@ require 'sinatra'
 require './environment'
 
 get '/' do
-  "foodpr0n"
+  Pron.current.image_source.src
 end
 
 post '/pron' do
   # set a new image
-  "nyi"
+  unseen_imgs = Image.filter(:pron => nil)
+  if unseen_imgs.empty?
+    status 204
+    return
+  end
+
+  Pron.create :image_id => unseen_imgs.max(:score).id
 end
 
 post '/img-src' do
@@ -20,5 +26,7 @@ post '/img-src/decay' do
 end
 
 get '/scores' do
-  ImageSource.order(:score.desc).limit(20).map(:img_src).join("<br>")
+  ImageSource.order(:score.desc).limit(20).map do |img|
+    "#{img.score} - #{img.src}"
+  end.join("<br>")
 end
