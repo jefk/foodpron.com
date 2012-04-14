@@ -7,11 +7,11 @@ get '/' do
 end
 
 post '/pron' do
-  # rotate the current image
+  # set a new image
   "nyi"
 end
 
-put '/img-src' do
+post '/img-src' do
   "nyi"
 end
 
