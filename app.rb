@@ -20,9 +20,7 @@ post '/pron' do
   end
 
   status 201
-  pron = Pron.create
-  img.pron_id = pron.id
-  img.save
+  img.make_pron
   ""
 end
 

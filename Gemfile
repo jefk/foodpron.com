@@ -8,6 +8,8 @@ gem 'yajl-ruby', '~> 1.1.0'
 
 gem 'rake', '~> 0.9.2.2'
 
+gem 'twitter', '~> 2.2.0'
+
 # dev
 gem 'rspec', '~> 2.9.0'
 gem 'sinatra-contrib', '~> 1.3.1'

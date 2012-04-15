@@ -26,4 +26,10 @@ class Image < Sequel::Model
     unseen_imgs.order(:score.desc).limit(1).first
   end
 
+  def make_pron
+    pron = Pron.create
+    self.pron_id = pron.id
+    self.save
+  end
+
 end
