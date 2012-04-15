@@ -42,8 +42,7 @@ class TwitterRobot
   end
 
   def extract_urls(s)
-    puts s
-    puts s.scan(%r|http://.*[\w$]|)
+    s.scan(%r|http://[^\s]*[\w$]|)
   end
 
   def auto_scale(times)
