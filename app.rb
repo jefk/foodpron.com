@@ -3,7 +3,12 @@ require 'sinatra'
 require './environment'
 
 get '/' do
-  Pron.current.image.src
+  current = Pron.current
+  if current.nil?
+    "no pron yet!"
+  else
+    current.image.src
+  end
 end
 
 post '/pron' do
@@ -39,7 +44,8 @@ end
 
 get '/scores' do
   Image.order(:score.desc).limit(20).map do |img|
-    "#{img.score} - #{img.src}"
+    score = "%.2f" % img.score
+    "#{score} - #{img.src}"
   end.join("<br>")
 end
 
