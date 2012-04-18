@@ -49,10 +49,11 @@ class TwitterRobot
   end
 
   def auto_scale(times)
-    # will check again in half time time it took for these tweets to come in
-    total_time = Time.now - times.first
-    p total_time
-    wait_time = total_time / 2
+    # will check again in the time it usually takes to get 8 tweets
+    avg_time = (times.last - times.first) / times.length
+    time_str = "%0.1f" % avg_time
+    puts "#{time_str} seconds per tweet"
+    wait_time = 8*avg_time
     bound(wait_time, 10, 100)
   end
 
