@@ -15,6 +15,8 @@ class TwitterRobot
       puts "waiting for #{@sleep_time} seconds"
       sleep @sleep_time + rand
       tweets = tweets_since(q, @max_id)
+      next if tweets.empty?
+
       tweets.sort_by! {|t| t.created_at}
       @max_id = tweets.last.id
       foodpron(tweets)
@@ -26,13 +28,14 @@ class TwitterRobot
 
   def tweets_since(q, max_id)
     tweets = Twitter.search(q, :result_type => 'recent', :since_id => max_id)
-    puts "query '#{q}': recieved #{tweets.lenght} tweets"
+    puts "query '#{q}': recieved #{tweets.length} tweets"
     tweets
   end
 
   def foodpron(tweets)
     tweets.each do |tweet|
       urls = extract_urls(tweet.text)
+      puts urls
     end
 #    tweet.from_user
 #    tweet.id
@@ -47,7 +50,7 @@ class TwitterRobot
 
   def auto_scale(times)
     # will check again in half time time it took for these tweets to come in
-    total_time = Time.now - times.first.created_at
+    total_time = Time.now - times.first
     p total_time
     wait_time = total_time / 2
     bound(wait_time, 10, 100)
@@ -55,6 +58,21 @@ class TwitterRobot
 
   def bound(x, min, max)
     [x, min, max].sort[1]
+  end
+
+end
+
+if $PROGRAM_NAME == __FILE__
+  puts "usage: ruby twitter_robot.rb [query]"
+  exit if ARGV.first.nil?
+  query = ARGV.first.strip
+  exit if query.empty?
+
+  robot = TwitterRobot.new ''
+  while true
+    begin
+      robot.go query
+    end
   end
 
 end
