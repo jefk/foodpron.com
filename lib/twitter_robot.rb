@@ -12,7 +12,7 @@ class TwitterRobot
   def go(q)
     puts "starting up the twitter robot"
     while true
-      puts "waiting for #{@sleep_time} seconds"
+      puts "waiting #{@sleep_time} seconds"
       sleep @sleep_time + rand
       tweets = tweets_since(q, @max_id)
       next if tweets.empty?
@@ -50,7 +50,8 @@ class TwitterRobot
 
   def auto_scale(times)
     # will check again in the time it usually takes to get 8 tweets
-    avg_time = (times.last - times.first) / times.length
+    # avg_time is laplace smooth'd
+    avg_time = (times.last - times.first + 10) / times.length
     time_str = "%0.1f" % avg_time
     puts "#{time_str} seconds per tweet"
     wait_time = 8*avg_time
