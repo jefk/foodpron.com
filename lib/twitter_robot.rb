@@ -1,4 +1,3 @@
-
 require 'twitter'
 
 class TwitterRobot
@@ -26,7 +25,7 @@ class TwitterRobot
 
   def tweets_since(q, max_id)
     tweets = Twitter.search(q, :result_type => 'recent', :since_id => max_id)
-    puts "query '#{q}': recieved #{tweets.lenght} tweets"
+    puts "query '#{q}': received #{tweets.length} tweets"
     tweets
   end
 
