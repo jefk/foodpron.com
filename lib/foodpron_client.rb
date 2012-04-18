@@ -1,21 +1,25 @@
 
-require 'net/http'
-require 'uri'
+require 'httparty'
+require 'yajl'
 
 class FoodpronClient
+  include HTTParty
 
   def initialize(base_path)
-    @base_path = base_path.start_with?('http://') ? base_path : "http://#{base_path}"
+    self.class.base_uri base_path
   end
 
   def post_image(url)
-    uri = URI.parse("{base_path}/img-src")
-    Net::HTTP.post_form(uri, :src => url)
+    post "/img-src", :src => url
   end
 
   def new_pron
-    uri = URI.parse("{base_path}/pron")
-    Net::HTTP.post_form(uri, "")
+    post "/pron"
   end
 
+  private
+
+  def post(path, hash = {})
+    self.class.post(path, :body => Yajl.dump(hash) )
+  end
 end
