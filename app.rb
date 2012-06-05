@@ -48,7 +48,6 @@ get '/scores' do
 end
 
 def json_body
-  puts request.body.read
   request.body.rewind # in case it has already been read
   Yajl.load request.body.read
 end

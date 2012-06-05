@@ -6,7 +6,7 @@ class Pron < Sequel::Model
   one_to_one :image
 
   def self.current
-    self[ self.max(:id) ]
+    self.order(:id).last
   end
 
 end
