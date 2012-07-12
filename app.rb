@@ -51,3 +51,9 @@ def json_body
   request.body.rewind # in case it has already been read
   Yajl.load request.body.read
 end
+
+before do
+  logger.info "-" * 30
+  logger.info "params    :    #{params}"
+  logger.info "json_body :    #{json_body}"
+end

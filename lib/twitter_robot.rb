@@ -18,8 +18,8 @@ class TwitterRobot
       next if tweets.empty?
 
       tweets.sort_by! {|t| t.created_at}
+      post_to_foodpron(tweets)
       @max_id = tweets.last.id
-      foodpron(tweets)
       @sleep_time = auto_scale(tweets.map {|t| t.created_at})
     end
   end
@@ -32,16 +32,21 @@ class TwitterRobot
     tweets
   end
 
-  def foodpron(tweets)
-    tweets.each do |tweet|
-      urls = extract_urls(tweet.text)
-      puts urls
-    end
+  def post_to_foodpron(tweets)
 #    tweet.from_user
 #    tweet.id
 #    tweet.text
 #    tweet.created_at
-#    puts "#{status.from_user}\t#{status.text}"
+    urls = tweets.map do |tweet|
+      urls = extract_urls(tweet.text)
+      puts tweet.text
+      puts urls.inspect
+    end.flatten
+
+    urls.each do |url|
+#      foodpron.post_image :src => ImageExtractor.largest_image(url)
+      nil
+    end
   end
 
   def extract_urls(s)
