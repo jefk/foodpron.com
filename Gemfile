@@ -7,8 +7,9 @@ gem 'sqlite3', '~> 1.3.5'
 gem 'yajl-ruby', '~> 1.1.0'
 
 # lib
+gem 'httparty', '~> 0.8.2'
 gem 'twitter', '~> 2.2.0'
-gem 'httparty'
+gem 'nokogiri', '~> 1.5.5'
 
 # dev
 gem 'rspec'
