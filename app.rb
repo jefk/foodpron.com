@@ -27,7 +27,7 @@ end
 post '/img-src' do
   # increment the score of an image
   src = json_body['src']
-  if src.nil? || src.empty?
+  if src.nil? || src.strip.empty?
     status 400
     Yajl.dump :errors => ":src cannot be blank"
   end
