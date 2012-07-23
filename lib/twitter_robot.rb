@@ -50,7 +50,7 @@ class TwitterRobot
         next
       end
       puts "posting #{img_src} to foodpron"
-      foodpron.post_image :src => img_src
+      foodpron.post_image img_src
     end
   end
 
