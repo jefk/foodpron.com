@@ -1,5 +1,7 @@
 
 require 'twitter'
+require_relative 'image_extractor'
+require_relative 'foodpron_client'
 
 class TwitterRobot
 
@@ -37,16 +39,19 @@ class TwitterRobot
 #    tweet.id
 #    tweet.text
 #    tweet.created_at
-    urls = tweets.map do |tweet|
+    tweets.each do |tweet|
       urls = extract_urls(tweet.text)
       puts tweet.text
       puts urls.inspect
-    end.flatten
 
-    urls.each do |url|
-#      foodpron.post_image :src => ImageExtractor.largest_image(url)
-      nil
+      urls.each do |url|
+        puts url
+        img_src = ImageExtractor.largest_image(url)
+        puts "posting #{img_src} to foodpron"
+        foodpron.post_image :src => img_src
+      end
     end
+
   end
 
   def extract_urls(s)
@@ -61,6 +66,10 @@ class TwitterRobot
     puts "#{time_str} seconds per tweet"
     wait_time = 8*avg_time
     bound(wait_time, 10, 100)
+  end
+
+  def foodpron
+    @foodpron ||= FoodpronClient.new('localhost:4567')
   end
 
   def bound(x, min, max)
