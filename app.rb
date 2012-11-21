@@ -3,24 +3,24 @@ require 'sinatra'
 require './environment'
 
 get '/' do
-  current = Pron.current
+  current = Image.pron
   if current.nil?
     "no pron yet!"
   else
-    current.image.src
+    current
   end
 end
 
 post '/pron' do
   # set a new image
-  img = Image.freshest
-  if img.nil?
+  src = Image.freshest
+  if src.nil?
     status 204
     return
   end
 
   status 201
-  img.make_pron
+  Image.make_pron(src)
   ""
 end
 
@@ -41,9 +41,9 @@ post '/img-src/decay' do
 end
 
 get '/scores' do
-  Image.order(:score.desc).limit(20).map do |img|
-    score = "%.2f" % img.score
-    "#{score} - #{img.src}"
+  Image.all.map do |src, score|
+    score = "%.2f" % score
+    "#{score} - #{src}"
   end.join("<br>")
 end
 

@@ -13,7 +13,7 @@ describe :foodpron do
       res.code.should == 201
     end
 
-    res = @foodpron.post_image("ayn #{rand 99999}")
+    res = @foodpron.post_image("one point #{rand 99999}")
     res.code.should == 201
 
     res = @foodpron.new_pron
