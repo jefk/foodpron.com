@@ -7,7 +7,7 @@ get '/' do
   if current.nil?
     "no pron yet!"
   else
-    current.image.src
+    current
   end
 end
 
