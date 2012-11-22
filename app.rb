@@ -37,7 +37,7 @@ post '/img-src/decay' do
 end
 
 get '/scores' do
-  Image.all.map do |src, score|
+  Image.top_ten.map do |src, score|
     score = "%.2f" % score
     "#{score} - #{src}"
   end.join("<br>")

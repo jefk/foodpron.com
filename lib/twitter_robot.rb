@@ -28,6 +28,8 @@ class TwitterRobot
 
   private
 
+  attr_accessor :foodpron_base
+
   def tweets_since(q, max_id)
     tweets = Twitter.search(q, :result_type => 'recent', :since_id => max_id)
     puts "query '#{q}': recieved #{tweets.length} tweets"
@@ -49,8 +51,10 @@ class TwitterRobot
       rescue
         next
       end
+      next unless img_src
+
       puts "posting #{img_src} to foodpron"
-      foodpron.post_image img_src
+      foodpron.post_image(img_src)
     end
   end
 
@@ -69,7 +73,7 @@ class TwitterRobot
   end
 
   def foodpron
-    @foodpron ||= FoodpronClient.new('localhost:4567')
+    @foodpron ||= FoodpronClient.new foodpron_base
   end
 
   def bound(x, min, max)
@@ -84,7 +88,7 @@ if $PROGRAM_NAME == __FILE__
   query = ARGV.first.strip
   exit if query.empty?
 
-  robot = TwitterRobot.new ''
+  robot = TwitterRobot.new 'localhost:4567'
   while true
     begin
       robot.go query

@@ -23,8 +23,8 @@ class Image
     redis.get(pron_key)
   end
 
-  def self.all
-    redis.zrange(set_key, 0, -1, with_scores: true)
+  def self.top_ten
+    redis.zrevrange(set_key, 0, 10, with_scores: true)
   end
 
   private
