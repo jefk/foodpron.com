@@ -4,6 +4,9 @@ source :rubygems
 gem 'sinatra', '~> 1.3.2'
 gem 'yajl-ruby', '~> 1.1.0'
 
+gem 'haml', '~>3.1.6'
+gem 'sass', '3.2.0'
+
 # lib
 gem 'httparty', '~> 0.8.2'
 gem 'twitter', '~> 2.2.0'

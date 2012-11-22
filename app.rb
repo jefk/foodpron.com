@@ -3,12 +3,8 @@ require 'sinatra'
 require './environment'
 
 get '/' do
-  current = Image.pron
-  if current.nil?
-    "no pron yet!"
-  else
-    current
-  end
+  src = Image.pron || 'img/default.jpg'
+  haml :index, locals: { :src => src }
 end
 
 post '/pron' do
@@ -45,6 +41,10 @@ get '/scores' do
     score = "%.2f" % score
     "#{score} - #{src}"
   end.join("<br>")
+end
+
+get '/style.css' do
+  sass :style
 end
 
 def json_body
