@@ -13,4 +13,4 @@ I made foodpron to play around with various technologies.
 Sinatra is used to create a really simple web API for posting new images, checking scores, and viewing the current image.
 
 ### redis
-there is one data model, an image, stored as a sorted set in redis.
+there is one data model, Image, stored as a sorted set in redis.
