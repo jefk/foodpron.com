@@ -9,7 +9,7 @@ gem 'sass', '3.2.0'
 
 # lib
 gem 'httparty', '~> 0.8.2'
-gem 'twitter', '~> 2.2.0'
+gem 'twitter', '~> 4.5.0'
 gem 'nokogiri', '~> 1.5.5'
 gem 'redis', '~> 3.0.2'
 
